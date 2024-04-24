@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Laundromat - Retrieve Reviews{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/forum.css')}}">
+
+<div class="forum-container">
+    <div class="forum_title">Laundry Rewards Program Rules</div>
+
+    <div class="forum-special-caption">
+        {% if reward_point != None %}
+            Your reward points is : {{ reward_point }}
+        {% endif %}
+
+    </div>
+
+    <div>
+
+        <h2>Earning Points</h2>
+        <ul>
+            <li>1. Earn 10 points for every wash and fold service.</li>
+            <li>2. Get 5 points for posting a response in our laundry services forum page.</li>
+            <li>3. Receive 2 points for every online review you submit through our website.</li>
+            <!-- Add more rules as needed -->
+        </ul>
+
+        <h2>Redeeming Points</h2>
+        <ul>
+            <li>1. Redeem 50 points for a 10% discount on your next laundry service.</li>
+            <li>2. Exchange 100 points for a free wash and fold service.</li>
+            <!-- Add more redemption rules as needed -->
+        </ul>
+
+        <h2>Additional Guidelines</h2>
+        <ul>
+            <li>1. Points are non-transferable and can only be used by the account holder.</li>
+            <li>2. Points expire after 12 months of inactivity.</li>
+            <li>3. The laundry service reserves the right to modify the rewards program rules at any time.</li>
+        </ul>
+
+    </div>
+</div>
+
+{% endblock %}

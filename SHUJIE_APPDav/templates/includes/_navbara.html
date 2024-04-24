@@ -1,0 +1,185 @@
+{% if session.get('true') %}
+    {% if session['logged_in'] == 'Admin' %}
+        <!-- Display full navbar for super admin -->
+        <nav class="first navbar navbar-expand-sm navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/admin_home"><img src="/static/img/logo.jpg" width="80px" height="80px" style="border-radius:25px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="textbar nav-item">
+                          <a class="nav-link" href="/admin_home">Home</a>
+                        </li>
+                        <li class="textbar nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Products</a>
+                            <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="/createproduct">Create Product</a></li>
+                           <li><a class="dropdown-item" href="/retrieveproducts">Retrieve Products</a></li>
+                           </ul>
+                         </li>
+                        <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Events</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateEvent">Create Event</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveEvent">Retrieve Events</a></li>
+                                        </ul>
+                            </li>
+                        <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Tips</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/createtip">Create Tip</a></li>
+                                            <li><a class="dropdown-item" href="/retrievetips">Retrieve Tips</a></li>
+                                        </ul>
+                            </li>
+                        <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Store Locator</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateLoc">Create Laundromat</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveLoc">Retrieve Laundromat</a></li>
+                                        </ul>
+                            </li>
+                        <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateService">Create Service</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveService">Retrieve Services</a></li>
+                                        </ul>
+                            </li>
+                          <li class="textbar nav-item">
+                            <a class="nav-link" href="/admin">Manage Users</a>
+                          </li>
+                          <li class="textbar nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Manage Admin</a>
+                          <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="/create_admin">Create Admin</a></li>
+                           <li><a class="dropdown-item" href="/admin_account">Retrieve Admin</a></li>
+                           </ul>
+                          </li>
+                           <li class="textbar nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Book</a>
+                          <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="/admin_home">Book</a></li>
+                           <li><a class="dropdown-item" href="/admin_home">Pickup and Delivery</a></li>
+                          </ul>
+
+
+                            <li class="profile nav-item">
+                                    <a href="/admin_home" class="nav-link"> Welcome {{ session['logged_in'] }} ! </a>
+                            </li>
+                        <li class="logout nav-item">
+                            <a href="{{ url_for('logout_page') }}" class="nav-link"> Logout </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/"><img src="/static/img/cart.png" alt="" width="60px" height="60px"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    {% else %}
+        <!-- Display navbar based on selected authorities for sub-admins -->
+        <nav class="first navbar navbar-expand-sm navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/admin_home"><img src="/static/img/logo.jpg" width="80px" height="80px" style="border-radius:25px;"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <ul class="navbar-nav">
+                    <li class="textbar nav-item">
+                        <a class="nav-link" href="/admin_home">Home</a>
+                    </li>
+
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="navbar-nav">
+                            {% for authority in session['selected_authorities'] %}
+                                {% if authority == 'Products' %}
+                                    <li class="textbar nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Products</a>
+                            <ul class="dropdown-menu">
+                           <li><a class="dropdown-item" href="/createproduct">Create Product</a></li>
+                           <li><a class="dropdown-item" href="/retrieveproducts">Retrieve Products</a></li>
+                           </ul>
+                         </li>
+                                {% elif authority == 'Event' %}
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Events</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateEvent">Create Event</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveEvent">Retrieve Events</a></li>
+                                        </ul>
+                                    </li>
+                                {% elif authority == 'Tips' %}
+                                    <!-- Add other navbar items based on selected authorities -->
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Tips</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/createtip">Create Tip</a></li>
+                                            <li><a class="dropdown-item" href="/retrievetips">Retrieve Tips</a></li>
+                                        </ul>
+                            </li>
+                                {% elif authority == 'Carbon Footprint' %}
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Carbon Footprint</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/admin_home">Calculate Carbon Footprint</a></li>
+                                            <li><a class="dropdown-item" href="/admin_home">Retrieve CarbonFootPrint</a></li>
+                                        </ul>
+                                    </li>
+                                {% elif authority == 'Store Locator' %}
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Store Locator</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateLoc">Create Laundromat</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveLoc">Retrieve Laundromat</a></li>
+                                        </ul>
+                                    </li>
+                            {% elif authority == 'Services' %}
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Services</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/AcreateService">Create Service</a></li>
+                                            <li><a class="dropdown-item" href="/AretrieveService">Retrieve Services</a></li>
+                                        </ul>
+                                    </li>
+                                {% elif authority == 'Manage Users' %}
+                                    <li class="textbar nav-item">
+                                        <a class="nav-link" href="/admin">Manage Users</a>
+                                    </li>
+                                {% elif authority == 'Manage Admin' %}
+                                    <!-- Add other navbar items based on selected authorities -->
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Manage Admin</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/create_admin">Create Admin</a></li>
+                                            <li><a class="dropdown-item" href="/admin_account">Retrieve Admin</a></li>
+                                        </ul>
+                                    </li>
+                                {% elif authority == 'Book' %}
+                                    <li class="textbar nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Book</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="/admin_home">Book</a></li>
+                                            <li><a class="dropdown-item" href="/admin_home">Pickup and Delivery</a></li>
+                                        </ul>
+                                    </li>
+                                {% endif %}
+
+                            {% endfor %}
+                            <li class="profile nav-item">
+                                    <a href="/admin_home" class="nav-link"> Welcome {{ session['logged_in'] }} ! </a>
+                            </li>
+                            <li class="logout nav-item">
+                                <a href="{{ url_for('logout_page') }}" class="nav-link"> Logout </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/"><img src="/static/img/cart.png" alt="" width="60px" height="60px"></a>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+    {% endif %}
+{% endif %}

@@ -1,0 +1,74 @@
+{% extends "basea.html" %}
+{% block title %}Laundry Room{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/PaT.css')}}">
+<h1 class="product">Retrieve Products</h1>
+<table class="table table-striped" border="0">
+  <thead>
+        <tr>
+            <th>Product Image</th>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th>Sustainability</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+  <tbody>
+{% for product in products_list %}
+  <tr>
+      <td><img src="static/img/{{ product.get_img() }}" alt="Product Image" style="width:100px;"></td>
+    <td>{{ product.get_name() }}</td>
+    <td>{{ product.get_type() }}</td>
+    {% if product.get_rating() == "1" %}
+    <td>Bad</td>
+    {% elif product.get_rating() == "2" %}
+    <td>Neutral</td>
+    {% elif product.get_rating() == "3" %}
+    <td>Good</td>
+    {% endif %}
+    <td><a href="/updateProduct/{{product.get_product_id()}}" class="btn btn-success1"><i class="fa fa-pencil" title="Update"></i></a></td>
+    <td>
+      <form action="{{url_for('delete_product', id=product.get_product_id())}}" method="POST">
+      <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-danger1" data-bs-toggle="modal" data-bs-target="#myModal_{{product.get_product_id()}}">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal_{{product.get_product_id()}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Delete Confirmation</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                          </div>
+
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                              Are you sure you want to delete {{product.get_name()}}?
+                          </div>
+
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                              <input type="submit" value="Delete" class="btn btn-danger">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                </td>
+  </tr>
+  {% endfor %}
+  <tr>
+        <td colspan="6" style="text-align:center;"><a href="/createproduct" class="btn btn-success1"><i class="fa fa-plus"></i></a></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

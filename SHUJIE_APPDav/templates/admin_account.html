@@ -1,0 +1,82 @@
+{% extends "basea.html" %}
+{% block title %}Admin - Manage Users{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style1.css')}}">
+<h1 class="display-4">Manage Admins</h1>
+<div>
+    {% if count == 0 %}
+      <p>There are no users.</p>
+    {% elif count == 1 %}
+      <p>There is 1 user.</p>
+    {% else %}
+      <p>There are {{ count }} users.</p>
+    {% endif %}
+</div>
+<div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+            <th>Admin ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Authority</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for admin in admin_list %}
+        <tr>
+            <td style="font-size: x-small;">{{ admin.get_admin_id() }}</td>
+            <td style="font-size: 14px;">{{ admin.get_first_name() }}</td>
+            <td style="font-size: 14px;">{{ admin.get_last_name() }}</td>
+             <td style="font-size: 14px;">{{ admin.get_authority() }}</td>
+            <td style="font-size: 14px;">{{ admin.get_email() }}</td>
+            <td style="font-size: 14px;">{{ admin.get_password() }}</td>
+            <td style="font-size: 14px;">{{ admin.get_description()}}</td>
+            <td><a href="/updateAdminAccount/{{ admin.get_admin_id() }}" class="btn btn-warning">Update</a></td>
+            <td>
+                <form action="{{url_for('delete_admin', id=admin.get_admin_id())}}" method="POST">
+                    <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#myModal_{{admin.get_admin_id()}}">
+                        Delete
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal_{{admin.get_admin_id()}}">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Delete Confirmation</h4>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                </div>
+
+                                <!-- Modal body -->
+                                <div class="modal-body">
+                                    Are you sure you want to delete {{admin.get_first_name()}} {{admin.get_last_name()}}?
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <!-- Include a submit button within the modal -->
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</div>
+{% endblock %}

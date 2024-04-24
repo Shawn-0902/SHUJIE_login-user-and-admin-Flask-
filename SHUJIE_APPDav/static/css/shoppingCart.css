@@ -1,0 +1,124 @@
+/* General table styling */
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 20px; /* More space below the table */
+  background-color: transparent;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Zebra striping for rows */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #f9f9f9; /* Lighter shade for striped effect */
+}
+
+/* Table cell styling */
+.table td, .table th {
+  padding: 15px; /* More padding for a spacious look */
+  vertical-align: middle;
+  border-top: 2px solid #dee2e6;
+  font-size: 0.95em;
+}
+
+/* Model column styling */
+.model-cell {
+  text-align: center;
+  padding: 15px 0;
+}
+
+/* Model images styling */
+.model-cell img {
+  width: 60px; /* Adjust the size as needed */
+  height: auto;
+  margin-bottom: 8px; /* Space between the image and the model name */
+}
+
+/* Model name styling */
+.model-cell span {
+  display: block;
+  font-weight: 600; /* Making the model name bold */
+}
+
+/* Button base styling */
+.btn {
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 5px;
+  transition: background-color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Update button styling */
+.btn-warning {
+  color: #fff;
+  background-color: #f0ad4e;
+}
+
+/* Delete button styling */
+.btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+}
+
+/* Checkout button styling */
+.btn-success {
+  color: #fff;
+  background-color: #5bc0de;
+}
+
+/* Button hover effects */
+.btn-warning:hover {
+  background-color: #ec971f;
+}
+
+.btn-danger:hover {
+  background-color: #c9302c;
+}
+
+.btn-success:hover {
+  background-color: #31b0d5;
+}
+
+/* Checkout button larger size */
+.btn-lg {
+  padding: 15px 30px;
+  font-size: 1.25rem;
+  border-radius: 5px;
+}
+
+/* Responsive design adjustments */
+@media (max-width: 768px) {
+  /* Adjust table layout for mobile */
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Adjust button sizes for mobile */
+  .btn {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+  }
+
+  /* Reduce model image size for mobile */
+  .model-cell img {
+    width: 50px; /* Smaller image size for mobile devices */
+  }
+
+  /* Adjust checkout button size for mobile */
+  .btn-lg {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+  }
+}
+
+

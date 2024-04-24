@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %} Update Review {% endblock %}
+{% block content %}
+
+{% from "includes/_formHelper.html" import render_field %}
+
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/forum.css')}}">
+<form method="POST" action="">
+<div class="forum-container">
+    <div class="forum-caption">
+      Update Review
+    </div>
+
+
+  <table class="update_review">
+     <table class="forum-table">
+
+      <tr>
+        <td class="special-td">
+
+          {{ render_field(form.first_name, class="form-control") }} <br>
+          {{ render_field(form.last_name, class="form-control") }} <br>
+          {{ render_field(form.gender, class="form-control") }} <br>
+          {{ render_field(form.star_rating, class="form-control") }} <br>
+          {{ render_field(form.remarks, class="form-control") }}
+        </td>
+    </tr>
+
+    <tr>
+      <td class="special-td"><input type="submit" value="Submit" class="btn btn-primary"/></td>
+    </tr>
+  </table>
+</div>
+</form>
+
+{% endblock %}

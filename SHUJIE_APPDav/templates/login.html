@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Sign_in{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style1.css')}}">
+
+<div class="container">
+    <div class="center-box">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-info">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <h1 class="display-4">Login</h1>
+        <form method='POST' action=''>
+            <div class="form-group1">
+                {{render_field(form.email, class = "form-control")}}
+            </div> <!-- form-group// -->
+            <div class="form-group1"> <!-- form-group// -->
+                {{render_field(form.password, class="form-control")}}
+            </div>
+           <div class="form-group1">
+                <label class="float-left custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input">
+                    <span>Remember Me</span>
+                </label>
+               <a href="{{ url_for('forgot_password') }}" class="float-right">Forgot password?</a>
+           </div>
+
+            <div class=" center-button">
+                <button type="submit" class="btn btn-primary btn-block"> Login </button>
+            </div> <!-- form-group// -->
+        </form>
+        <p class="text-center mt-4">Don't have account? <a href="{{ url_for('create_user') }}">Sign up</a></p>
+        <p class="text-center mt-4">login as admin? <a href="{{ url_for('login_admin') }}">login as admin</a></p>
+            <br><br>
+	</div>
+</div>
+{% endblock %}
+

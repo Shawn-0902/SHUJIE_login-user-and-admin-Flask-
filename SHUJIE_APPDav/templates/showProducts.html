@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/PaT.css')}}">
+<h1 class="product">Products</h1>
+{% for product in products_list %}
+<div class="d-inline-flex p-3 card">
+    <div><img src="static/img/{{ product.get_img() }}" alt="Product Image" style="width:100px;"></div>
+    <div>{{ product.get_name() }}</div>
+    <div>Type: {{ product.get_type() }}</div>
+    <div>Sustainability: {% if product.get_rating() == "1" %}
+    Bad
+    {% elif product.get_rating() == "2" %}
+    Neutral
+    {% elif product.get_rating() == "3" %}
+    Good
+    {% endif %}</div>
+    </div>
+{% endfor %}
+{% endblock %}

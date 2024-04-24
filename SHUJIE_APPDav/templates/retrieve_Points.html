@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Laundromat - Retrieve Reviews{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/forum.css')}}">
+
+<div class="forum-container">
+    <div class="forum_title">Reward Points</div>
+</div>
+
+<div class="forum-container">
+    <table class="review-table">
+        <tr>
+            <th>User ID</th>
+            <th>Points</th>
+        </tr>
+
+        {% for review in rewards_list %}
+
+        <tr>
+            <td class="special-td" width="50px">
+                {{ review.get_user_id() }}
+            </td>
+            <td class="special-td" width="50px">
+                {{ review.get_points() }}
+            </td>
+
+        </tr>
+  {% endfor %}
+    </table>
+</div>
+{% endblock %}

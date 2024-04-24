@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room - Retrieve Service{% endblock %}
+
+{% block content %}
+
+
+<style>
+.service-card {
+  background: #ffffff; /* White background */
+  border: 1px solid #ddd; /* Light grey border */
+  border-radius: 4px; /* Rounded corners */
+  padding: 20px; /* Padding inside the card */
+  margin-bottom: 20px; /* Space between cards */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+.card-title {
+  margin-bottom: 10px;
+  color: #333; /* Dark grey color for the title */
+}
+
+.card-text {
+  margin-bottom: 20px;
+  color: #666; /* Medium grey for the text */
+}
+
+.btn {
+  margin-right: 10px; /* Space between buttons */
+}
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa; /* Sets the background color of the page */
+  }
+
+  /* Container for all cards */
+  .card-container {
+    border: 1px solid #ddd; /* Adds a border around the entire card container */
+    padding: 20px; /* Adds space inside the container */
+    border-radius: 4px; /* Rounds the corners of the container */
+    margin: 20px auto; /* Centers the container */
+    max-width: 1000px; /* Sets a max width for the container */
+    background-color: #f9f9f9; /* Sets a background color for the container */
+  }
+
+  /* Individual service cards */
+  .service-card {
+    background: #ecf0f1; /* Sets the background color of the cards */
+    border: none; /* Removes individual card borders */
+    margin-bottom: 20px; /* Space between cards */
+  }
+
+  /* Title for the services section */
+  .services-title {
+    text-align: center; /* Centers the title text */
+    font-size: 24px; /* Sets the size of the title */
+    margin-top: 20px; /* Adds space above the title */
+    margin-bottom: 20px; /* Adds space below the title */
+  }
+  .service-card-link {
+  text-decoration: none; /* Removes the underline from links */
+  color: inherit; /* The link will use the text color of the parent element */
+  display: block; /* Makes the link block-level, allowing it to contain the card */
+}
+
+.service-card:hover {
+  background-color: #e2e2e2; /* Change color on hover for a clickable effect */
+  cursor: pointer; /* Change mouse cursor to indicate the card is clickable */
+}
+</style>
+
+{% for Service in service_list %}
+  <a href="{{ url_for('service_page', service_name=Service.get_name()) }}" class="service-card-link">
+    <div class="service-card">
+      <div class="card-body">
+        <h5 class="card-title">{{ Service.get_name() }}</h5>
+        <p class="card-text">{{ Service.get_description() }}</p>
+      </div>
+    </div>
+  </a>
+{% endfor %}
+
+{% if show_load_more %}
+  <button id="load-more" onclick="loadMore()">Load More</button>
+{% endif %}
+
+<script>
+  let start = {{ Service_list|length }};
+
+function loadMore() {
+  fetch(`/AretrieveService?start=${start}`)
+    .then(response => response.text())
+    .then(html => {
+      let div = document.createElement('div');
+      div.innerHTML = html;
+      let newRows = div.querySelector('tbody').children;
+      let tbody = document.querySelector('table tbody');
+      for (let row of newRows) {
+        tbody.appendChild(row);
+      }
+      start += limit;
+      if (start >= {{ count }}) {
+        document.getElementById('load-more').remove();
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}

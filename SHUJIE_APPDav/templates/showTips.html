@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/PaT.css')}}">
+<h1 class="product">Tips</h1>
+{% for tip in tips_list %}
+<div class="d-inline-flex p-3 card">
+    <div>{{ tip.get_title() }}</div>
+    <div>{{ tip.get_desc() }}</div>
+    </div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %} Create Forum Response {% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/forum.css')}}">
+<form method="POST" action="">
+  <div class="forum-container">
+    <div class="forum-caption">
+      Post your suggestion
+    </div>
+
+    <table class="forum-table">
+
+      <tr>
+        <td class="special-td">
+            {{ render_field(form.name, class="form-control") }}
+            <br>
+            {{ render_field(form.gender, class="form-control") }}
+            <br>
+            {{ render_field(form.content, class="form-control")}}
+        </td>
+      </tr>
+      <tr>
+          <td class="special-td" id="review_submit"><input type="submit" value="Submit" class="btn btn-primary btn-block"/></td>
+      </tr>
+    </table>
+  </div>
+</form>
+
+{% endblock %}

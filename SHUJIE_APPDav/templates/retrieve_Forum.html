@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block title %}Laundromat - Retrieve Forum{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/forum.css')}}">
+
+<div class="forum-container">
+    <div class="forum_title">Laundromat Efficiency Forum</div>
+    <div class="forum-topic">Topic : Collaborative Solutions for Operational Excellence</div>
+    <div class="forum-description">
+        Join our Laundromat Efficiency Forum to engage with industry experts and fellow business owners in exploring strategies, tools, and insights aimed at optimizing laundromat operations. Whether you're seeking advice on equipment maintenance, discussing innovative technologies, or sharing tips for improved customer service, this forum is the hub for collaboration and knowledge exchange. Harness the collective expertise of the community to overcome challenges, enhance efficiency, and stay at the forefront of the evolving laundromat landscape. Together, let's drive operational excellence in the laundromat industry.
+    </div>
+</div>
+
+<div class="forum-container">
+    <table class="forum-table">
+        <tr>
+            <th class="special-th" colspan="3" style="text-align:left">
+
+                {% if count == 0 %}
+                  There are no responses.
+                  {% elif count == 1 %}
+                  There is 1 response.
+                  {% else %}
+                  There are {{ count }} responses.
+                  {% endif %}
+            </th>
+             <th class="special-th" colspan="1" style="text-align:center">
+                 {% if session.get('true') %}
+                    <a class="special-link" href="/C_forum"><img width="50px" height="50px" title="Post your response" src="/static/img/forum.png"></a>
+                 {% else %}
+                    Please log in to insert your forum response
+                    <a class="special-link" href="/login"><img width="50px" height="50px" title="Post your response" src="/static/img/forum.png"></a>
+                {% endif %}
+             </th>
+        </tr>
+
+    {% for forum in forums_list %}
+
+        <tr>
+            <td class="special-td" id="profile_pic" width="50px">
+                {% if forum.get_gender() == 'M' %}
+                    <img src="static/img/men1.png" alt="pic of man" width="55px" height="55px"><br>
+                    {{ forum.get_name() }}
+                {% elif forum.get_gender() == 'F' %}
+                    <img src="static/img/women1.png" alt="pic of woman" width="55px" height="55px"><br>
+                    {{ forum.get_name() }}
+                {% endif %}
+            </td>
+            <td class="special-td" width="150px">{{ forum.get_postedOn() }}</td>
+            <td class="special-td" >{{ forum.get_content() }}</td>
+            <td class="special-td" width="150px">
+                <a href="/U_forum/{{forum.get_forum_id()}}" class="btn btn-update" title="Update">
+                    <i class="fa fa-cog"></i>
+                </a> &nbsp;&nbsp;
+                <a href="/D_forum/{{forum.get_forum_id()}}" onclick="return confirm('Are you sure you want to delete this forum response?');" class="btn btn-delete" title="Delete">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

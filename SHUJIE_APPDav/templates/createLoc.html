@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room - Location Tracker{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+
+<div class="container mt-4">
+    <h1 class="display-4">Find Laundromat Near Me</h1>
+    <form id="LocationForm" name="LocationForm" class="mt-4" method="post" action="{{ url_for('createLoc') }}">
+        <div class="mb-3">
+            {{ render_field(form.country, class="form-control", id="country", required=true) }}
+        </div>
+        <div class="mb-3">
+            {{ render_field(form.postal_code, class="form-control", id="postalCode", required=true) }}
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" onclick="getLocation()" class="btn btn-primary">Use Current Location</button>
+            <input type="submit" value="Find Laundromat" class="btn btn-success">
+        </div>
+    </form>
+</div>
+
+<script>
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(reverseGeocode, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function reverseGeocode(position) {
+    var lat = position.coords.latitude;
+    var lon = position.coords.longitude;
+    var url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var country = data.address.country;
+            var postalCode = data.address.postcode;
+
+            document.getElementById('country').value = country;
+            document.getElementById('postalCode').value = postalCode;
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function showError(error) {
+    switch(error.code) {
+        case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+        case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+        case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+        case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+    }
+}
+</script>
+{% endblock %}

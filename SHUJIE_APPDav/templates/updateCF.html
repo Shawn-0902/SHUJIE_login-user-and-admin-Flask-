@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room - Calculate CF{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+
+<style>
+    body {
+        background: #f0f2f5; /* Neutral background */
+        font-family: 'Arial', sans-serif;
+    }
+    .custom-form-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+    }
+    .custom-form {
+        width: 100%;
+        max-width: 600px;
+        background: #e3e7eb; /* Soft gray background for the form */
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        padding: 25px;
+        border: 1px solid #ced4da; /* Slightly darker border for definition */
+    }
+    .custom-form h1 {
+        color: #343a40; /* Dark gray for the title */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .btn-primary {
+        background-color: #007bff; /* Classic Bootstrap blue */
+        border-color: #007bff;
+        color: white;
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }
+    .form-check {
+        margin-bottom: 15px;
+    }
+    .form-control {
+        border-radius: 5px;
+        border: 1px solid #ced4da;
+    }
+</style>
+
+<div class="custom-form-container">
+    <div class="custom-form">
+        <h1 class="display-4">Calculate Your Carbon Footprint</h1>
+        <form method="POST" action="">
+          <div class="form-group">
+            {{ render_field(form.service, class="form-check", style="list-style-type:none") }}
+          </div>
+          <div class="form-group">
+            {{ render_field(form.temp, class="form-check", style="list-style-type:none") }}
+          </div>
+          <div class="form-group">
+            {{ render_field(form.load, class="form-control") }}
+          </div>
+          <div class="form-group">
+            {{ render_field(form.time, class="form-control") }}
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

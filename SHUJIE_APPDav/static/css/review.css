@@ -1,0 +1,22 @@
+.create_review{
+    margin: auto;
+}
+
+#review_title{
+    text-align: center;
+}
+
+#creview{
+    margin: auto;
+    width: 400px;
+    background-color: #FFE5B4;
+}
+
+#submit{
+    padding-top: 20px;
+    text-align: center;
+}
+
+.star_rating{
+    width: 300px;
+}

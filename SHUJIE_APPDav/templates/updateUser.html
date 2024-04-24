@@ -1,0 +1,75 @@
+{% extends "basea.html" %}
+{% block title %}Library Loan System - Update User{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style1.css')}}">
+
+
+<div class="container2">
+    <div class="center-box2">
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="alert alert-info">
+            {{ messages[0] }}
+        </div>
+    {% endif %}
+{% endwith %}
+
+<h1 class="display-4">Update User</h1>
+        <form method="POST" action="">
+            <div class="form-row">
+                <div class="form-group">
+                    {{ render_field(form.first_name, class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.last_name, class="form-control") }}
+                </div>
+            </div>
+            <div class="form-group" style="width: 100%;">
+                Email Address:
+                <div class="input-group">
+                    {{ form.email(value=form.email.data, class="form-control", readonly="readonly") }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ render_field(form.gender, class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.birthdate, class="form-control") }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    {{ render_field(form.city, class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.postal_code, class="form-control", placeholder="eg.100024") }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group" style="width: 100%;">
+                    {{ render_field(form.address, class="form-control") }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    {{ render_field(form.password, class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ render_field(form.confirm, class="form-control") }}
+                </div>
+            </div>
+
+            <div class="center-button" style="margin-top: 20px;">
+				<button type="submit" class="btn btn-primary btn-block"> Update Information </button>
+			</div> <!-- form-group// -->
+        </form>
+    </div>
+</div>
+
+{% endblock %}

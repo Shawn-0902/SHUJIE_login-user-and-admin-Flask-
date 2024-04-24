@@ -1,0 +1,253 @@
+{% extends "basea.html" %}
+{% block title %}Laundry Room - Retrieve Service{% endblock %}
+
+{% block content %}
+
+
+<style>
+  .table-custom {
+    background-color: #f2f2f2; /* Light gray background */
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+  .table-custom th, .table-custom td {
+      border: 1px solid #ddd; /* Gray borders */
+      padding: 8px;
+  }
+
+  .table-custom th {
+      background-color: #4CAF50; /* Green header */
+      color: white;
+      text-align: left;
+  }
+
+  .table-custom tr:hover {
+      background-color: #ddd; /* Hover effect */
+  }
+
+  @media screen and (max-width: 600px) {
+      .table-custom {
+          width: 100%;
+          display: block;
+          overflow-x: auto; /* Responsive table */
+      }
+  }
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+    .custom-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .custom-container h1 {
+        color: #17a2b8;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .btn-custom {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: black;
+    }
+    .btn-custom:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+      .table-custom {
+        background-color: #f9f9f9;
+        border-collapse: collapse;
+        width: 100%;
+        font-family: 'Roboto', sans-serif;
+    }
+    .table-custom th, .table-custom td {
+        border: 1px solid #e3e3e3;
+        padding: 12px;
+    }
+    .table-custom th {
+        background-color: #6c757d;
+        color: white;
+    }
+    .table-custom tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+    .table-custom tr:hover {
+        background-color: #d1d1d1;
+    }
+    .modal-content {
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+    }
+    .btn-custom {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+    .btn-custom:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }\
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ecf0f1; /* Light grey background for each list item */
+    margin-bottom: 10px;
+    border-radius: 5px; /* Rounded corners for each list item */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  .list-item:nth-child(odd) {
+    background-color: #dae1e7; /* Alternating background color for list items */
+  }
+  .list-actions {
+    display: flex;
+    align-items: center;
+  }
+  .list-actions a, .list-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; /* Fixed size for buttons */
+    height: 32px;
+    margin-left: 8px; /* Spacing between buttons */
+    border-radius: 50%; /* Circular buttons */
+    color: white; /* Icon color */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+  }
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+  }
+  .fa-pen, .fa-trash {
+    width: 14px; /* Fixed width for icons */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+    color: black; /* Ensures the pen icon is visible */
+  }
+
+  .btn-update .fa-pen {
+    color: black; /* This can be changed to any color that makes the pen visible */
+  }
+
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+    color: white; /* Ensures the trash icon is visible */
+  }
+
+  .btn-delete .fa-trash {
+    color: white; /* This can be changed to any color that makes the trash icon visible */
+  }
+
+  /* Additional style for hover effects */
+  .btn-update:hover, .btn-delete:hover {
+    opacity: 0; /* Slight transparency on hover for interaction feedback */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+    color: white; /* For better contrast and visibility */
+  }
+
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+    color: white; /* Ensures the trash icon is visible */
+  }
+
+  /* Additional style for hover effects */
+  .btn-update:hover, .btn-delete:hover {
+    opacity: 0.8; /* Slight transparency on hover for interaction feedback */
+  }
+</style>
+
+
+  <h1 class="display-4">Retrieve Events</h1>
+  <div>
+    <table  class="table table-custom">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Update</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for Service in service_list %}
+          <tr>
+            <td>{{ Service.get_name() }}</td>
+            <td>{{ Service.get_description()  }}</td>
+            <td><a href="/AupdateService/{{Service.get_name()}}" class="btn btn-update" title="Update">
+          <i class="fa fa-cog"></i>
+        </a></td>
+            <td>
+          <form action="{{url_for('Adelete_Service', Service_name=Service.get_name())}}" method="POST">
+            <button type="button" class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#myModal_{{Service.get_name()}}" title="Delete">
+          <i class="fa fa-trash"></i>
+        </button>
+                        <!-- The Modal -->
+            <div class="modal" id="myModal_{{Service.get_name()}}">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <!-- Modal Header -->
+                  <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                  </div>
+
+                  <!-- Modal body -->
+                  <div class="modal-body">
+                    Are you sure you want to delete Service "{{Service.get_name()}}" ?
+                  </div>
+
+                  <!-- Modal footer -->
+                  <div class="modal-footer">
+                    <input type="submit" value="Delete" class="btn btn-danger">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+            </td>
+          </tr>
+
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% if show_load_more %}
+  <button id="load-more" onclick="loadMore()">Load More</button>
+{% endif %}
+
+<script>
+  let start = {{ Service_list|length }};
+
+function loadMore() {
+  fetch(`/AretrieveService?start=${start}`)
+    .then(response => response.text())
+    .then(html => {
+      let div = document.createElement('div');
+      div.innerHTML = html;
+      let newRows = div.querySelector('tbody').children;
+      let tbody = document.querySelector('table tbody');
+      for (let row of newRows) {
+        tbody.appendChild(row);
+      }
+      start += limit;
+      if (start >= {{ count }}) {
+        document.getElementById('load-more').remove();
+      }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+{% endblock %}

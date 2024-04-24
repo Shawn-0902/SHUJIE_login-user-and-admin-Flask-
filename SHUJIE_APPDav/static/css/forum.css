@@ -1,0 +1,147 @@
+table.forum-table {
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+
+table.forum-table th {
+    border: 0px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    /* background-color: #f2f2f2;*/
+}
+
+/* Styles for Specific Table Rows */
+table.forum-table td.special-td {
+    border: 2px solid #ddd;  /* Specific border for the special td */
+    padding: 15px;  /* Specific padding for the special td */
+    font-weight: bold;  /* Specific font-weight for the special td */
+}
+
+/* Alternate Row Background Color for Specific Table */
+table.forum-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
+.btn-update {
+    background-color: #3498db; /* Blue for update */
+    color: white; /* Ensures the pen icon is visible */
+}
+
+
+.fa-pen, .fa-trash {
+    width: 14px; /* Fixed width for icons */
+}
+
+
+.btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+    color: white; /* Ensures the trash icon is visible */
+}
+
+
+/* Additional style for hover effects */
+.btn-update:hover, .btn-delete:hover {
+    opacity: 0.8; /* Slight transparency on hover for interaction feedback */
+}
+
+.forum_title {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.forum-topic {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.forum-caption {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3498db
+    margin-bottom: 10px;
+}
+
+.forum-special-caption {
+    font-size: 20px;
+    font-weight: bold;
+    color: #3498db
+    margin-bottom: 10px;
+}
+
+
+.forum-link {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3498db
+    margin-bottom: 10px;
+}
+
+/* Styles for Forum Description */
+.forum-description {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+    text-align:justify;
+}
+
+/* Overall Container Style */
+.forum-container {
+    max-width: 80%;
+    max-height: 80%;
+    margin: 0 auto;
+}
+
+
+a.special-link {
+    font-size: 20px;
+    color: #3498db;  /* Special link color */
+    font-weight: bold;  /* Special font weight */
+    text-decoration: underline;  /* Add underline to this specific link */
+}
+
+a.special-link:hover {
+    color: #e74c3c;  /* Change color on hover */
+    text-decoration: none;  /* Remove underline on hover */
+}
+
+
+
+
+/***************************** Review CSS****************************/
+
+table.review-table {
+    border: 1px solid #ddd;
+    width: 100%;
+}
+
+
+table.review-table th {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    /* background-color: #f2f2f2;*/
+}
+
+table.review-table th.special-th {
+    border: 0px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Styles for Specific Table Rows */
+table.review-table td.special-td {
+    border: 2px solid #ddd;  /* Specific border for the special td */
+    padding: 15px;  /* Specific padding for the special td */
+    font-weight: bold;  /* Specific font-weight for the special td */
+}
+
+/* Alternate Row Background Color for Specific Table */
+table.review-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}

@@ -1,0 +1,78 @@
+.btn-success {
+    padding: 10px 20px;
+    font-size: 20px;
+    text-align: center;
+    margin-left:60px;
+}
+.btn-success1 {
+    padding: 5px 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color:green;
+    color:white;
+}
+.btn-success1:hover {
+    padding: 5px 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color:darkgreen;
+    color:white;
+}
+.btn-danger1 {
+    padding: 5px 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color:red;
+    color:white;
+}
+.btn-danger1:hover {
+    padding: 5px 30px;
+    font-size: 20px;
+    text-align: center;
+    background-color:darkred;
+    color:white;
+}
+h3.item{
+    margin-right:750px;
+}
+h3.item1{
+    margin-left:750px;
+    margin-top:-560px;
+}
+div.card{
+    background-color:lightgray;
+    border-radius:25px;
+    box-shadow:0px 0px 25px #888888;
+    margin-top:30px;
+    display:flex;
+    flex-wrap: wrap;
+}
+.card > div {
+  text-align:center;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+div.card1{
+    background-color:lightgray;
+    border-radius:25px;
+    box-shadow:0px 0px 25px #888888;
+    margin-right:725px;
+    height:90px;
+    width:730px;
+}
+div.cards{
+    background-color:lightgray;
+    border-radius:25px;
+    box-shadow:0px 0px 25px #888888;
+    margin-left:780px;
+    width:700px;
+}
+h1.product{
+    text-align:center;
+}
+.form-group{
+    width:40%;
+    position:relative;
+    left:28%;
+}

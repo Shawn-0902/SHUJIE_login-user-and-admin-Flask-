@@ -1,0 +1,82 @@
+
+{% extends "base.html" %}
+
+{% block title %}Laundry Room - Services{% endblock %}
+
+{% block content %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: #eeeeee;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        display: flex; /* Use flexbox for side-by-side layout */
+        justify-content: space-between; /* Space out the sections */
+        align-items: center; /* Align items vertically */
+        margin: 20px auto;
+        padding: 20px;
+        background: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .services-section {
+        flex: 1; /* Allocate equal space to both sections */
+        padding: 20px;
+        text-align: left; /* Align text to the left */
+    }
+    .services-section h2 {
+        font-size: 2em;
+        color: #333;
+        margin: 0 0 10px;
+    }
+    .services-section p {
+        font-size: 1.2em;
+        margin: 0 0 20px;
+    }
+    .services-section button {
+        padding: 10px 20px;
+        background: #333;
+        color: white;
+        border: none;
+        cursor: pointer;
+        text-transform: uppercase;
+        border-radius: 5px;
+    }
+    .services-section button:hover {
+        background: #555;
+    }
+    .pricing-section {
+        flex: 1; /* Allocate equal space to both sections */
+        padding: 20px;
+        background: #f7f7f7; /* Lighter background for contrast */
+        text-align: left; /* Align text to the left */
+        border-left: 1px solid #ccc; /* Separator between sections */
+    }
+    .pricing-section h3 {
+        font-size: 1.5em;
+        margin: 0 0 10px;
+    }
+    .pricing-section p {
+        font-size: 1.2em;
+        margin: 0 0 5px;
+        font-weight: bold;
+    }
+</style>
+
+<div class="container">
+    <div class="services-section">
+        <h2>Laundry & Dry Cleaning Pick Up & Delivery</h2>
+        <p>Leave your clothes impeccable in a few simple steps. Easy, Fast and Safe.</p>
+        <button onclick="window.location.href='/servicechoose'">Pick up / Delivery</button>
+    </div>
+
+    <div class="pricing-section">
+        <h3>Pick up & Delivery Service</h3>
+        <p>Up to 8/Kg $12.15</p>
+        <p>Additional Fees $1.25/Kg</p>
+    </div>
+</div>
+
+{% endblock %}

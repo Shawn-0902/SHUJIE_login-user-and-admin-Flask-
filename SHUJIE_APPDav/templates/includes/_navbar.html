@@ -1,0 +1,117 @@
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style1.css')}}">
+<nav class="first navbar navbar-expand-sm navbar-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/"><img src="/static/img/logo.jpg" width="80px" height="80px" style="border-radius:25px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+
+        <div class="navbar">
+            <ul class="nav">
+                <!-- Your other navigation items -->
+                {% if session.get('true') %}
+                <ul class="navbar-nav">
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/showproducts">Products</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/retrieveEvent">Events</a>
+                    </li>
+                     <li class="textbar nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Carbon Footprint</a>
+                      <ul class="dropdown-menu">
+
+                       <li><a class="dropdown-item" href="/createCF">Calculate Carbon Footprint</a></li>
+                       <li><a class="dropdown-item" href="/retrieveCF">Retrieve Carbon Footprint</a></li>
+                       </ul>
+                     </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/showtips">Tips</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/createLoc">Store Locator</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/homeservice">Services</a>
+                    </li>
+                    <li class="textbar nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Forum</a>
+                      <ul class="dropdown-menu">
+
+                       <li><a class="dropdown-item" href="/R_forum">View Forum</a></li>
+                       <li><a class="dropdown-item" href="/R_review">View Review</a></li>
+                       </ul>
+                     </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/R_Howtogetpoints" role="button" >Rewards</a>
+                     </li>
+                    <li class="profile nav-item">
+                        <a href="{{ url_for('update_profile_page') }}" class="nav-link"> Welcome {{ session['logged_in'] }} ! </a>
+                    </li>
+                    <li class="logout nav-item">
+                        <a href="{{ url_for('logout_page') }}" class="nav-link"> Logout </a>
+                    </li>
+                    <li class="book nav-item">
+                      <a class="nav-link" href="/">Book</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/"><img src="/static/img/cart.png" alt="" width="60px" height="60px"></a>
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="navbar-nav">
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/showproducts">Products</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/retrieveEvent">Events</a>
+                    </li>
+                    <li class="textbar nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Carbon Footprint</a>
+                      <ul class="dropdown-menu">
+
+                       <li><a class="dropdown-item" href="/createCF">Calculate Carbon Footprint</a></li>
+                       <li><a class="dropdown-item" href="/retrieveCF">Retrieve Carbon Footprint</a></li>
+                       </ul>
+                     </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/showtips">Tips</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/createLoc">Store Locator</a>
+                    </li>
+                    <li class="textbar nav-item">
+                      <a class="nav-link" href="/homeservice">Services</a>
+                    </li>
+                    <li class="textbar nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Forum</a>
+                      <ul class="dropdown-menu">
+
+                       <li><a class="dropdown-item" href="/R_forum">View Forum</a></li>
+                       <li><a class="dropdown-item" href="/R_review">View Review</a></li>
+                       </ul>
+                     </li>
+                    <li class="sign nav-item">
+                        <a class="nav-link" href="/create_user">Sign Up</a>
+                    </li>
+                    <li class="log nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    <li class="book nav-item">
+                      <a class="nav-link" href="/">Book</a>
+                    </li>
+                </ul>
+                {% endif %}
+            </ul>
+        </div>
+      </ul>
+    </div>
+  </div>
+</nav>

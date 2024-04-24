@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Laundromat - Retrieve Rewards{% endblock %}
+
+{% block content %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/review.css')}}">
+<h1 class="display-4">Rewards</h1>
+<div>
+  {% if count == 0 %}
+  <p>There are no rewards.</p>
+  {% elif count == 1 %}
+  <p>There is 1 reward record.</p>
+  {% else %}
+  <p>There are {{ count }} rewards record.</p>
+  {% endif %}
+</div>
+<div>
+  {% for reward in rewards_list %}
+    <table class="review_table" border="3">
+        <tr>
+            <td >User ID: {{ reward }}</td>
+
+        </tr>
+    </table>
+  {% endfor %}
+</div>
+{% endblock %}

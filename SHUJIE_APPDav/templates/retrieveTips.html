@@ -1,0 +1,64 @@
+    {% extends "basea.html" %}
+{% block title %}Laundry Room{% endblock %}
+
+{% block content %}
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/PaT.css')}}">
+<h1 class="product">Retrieve Tips</h1>
+<table class="table table-striped" border="0">
+  <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Product Type</th>
+            <th></th>
+            <th></th>
+
+        </tr>
+        </thead>
+  <tbody>
+{% for tip in tips_list %}
+  <tr>
+    <td>{{ tip.get_title() }}</td>
+    <td>{{ tip.get_desc() }}</td>
+    <td><a href="/updateTip/{{tip.get_tip_id()}}" class="btn btn-success1"><i class="fa fa-pencil" title="Update"></i></a></td>
+    <td>
+      <form action="{{url_for('delete_tip', id=tip.get_tip_id())}}" method="POST">
+      <!-- Button to Open the Modal -->
+                    <button type="button" class="btn btn-danger1" data-bs-toggle="modal" data-bs-target="#myModal_{{tip.get_tip_id()}}">
+                      <i class="fa fa-trash"></i>
+                    </button>
+
+                    <!-- The Modal -->
+                    <div class="modal" id="myModal_{{tip.get_tip_id()}}">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <!-- Modal Header -->
+                          <div class="modal-header">
+                            <h4 class="modal-title">Delete Confirmation</h4>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                          </div>
+
+                          <!-- Modal body -->
+                          <div class="modal-body">
+                              Are you sure you want to delete {{tip.get_title()}}?
+                          </div>
+
+                          <!-- Modal footer -->
+                          <div class="modal-footer">
+                              <input type="submit" value="Delete" class="btn btn-danger">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                </td>
+  </tr>
+  {% endfor %}
+  <tr>
+        <td colspan="6" style="text-align:center;"><a href="/createtip" class="btn btn-success1"><i class="fa fa-plus"></i></a></td>
+    </tr>
+  </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "basea.html" %}
+{% block title %}Admin - Manage Users{% endblock %}
+
+{% block content %}
+{% from "includes/_formHelper.html" import render_field %}
+<link type="text/css" rel="stylesheet" href="{{url_for('static',filename='css/style1.css')}}">
+<style>
+        .container_authority {
+            max-width: 800px;
+            margin: 10px auto;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+<div style="margin-top:5%;">
+    <div class="center-box2">
+		{% with messages = get_flashed_messages() %}
+			{% if messages %}
+				<div class="alert alert-info">
+					{{ messages[0] }}
+				</div>
+			{% endif %}
+		{% endwith %}
+		<h1 class="display-4">Sign up as Admin</h1>
+
+		<form method="POST" action="">
+			<div class="form-row">
+				<div class="form-group">
+					{{ render_field(form.first_name, class="form-control") }}
+				</div> <!-- form-group end.// -->
+				<div class="form-group">
+					{{ render_field(form.last_name, class="form-control") }}
+				</div> <!-- form-group end.// -->
+			</div> <!-- form-row end.// -->
+			<div class="form-group" style="width: 100%;">
+				{{ render_field(form.email, class="form-control") }}
+				<small class="form-text text-muted">We'll never share your email with anyone else.</small>
+			</div> <!-- form-group end.// -->
+
+			<div class="container_authority">
+				<div class="form-group">
+					{{ form.authority.label }}
+					{% for choice in form.authority %}
+						<div class="form-check" >
+							{{ choice(class="form-check-input") }}
+							{{ choice.label(class="form-check-label") }}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="form-group" style="width: 100%;">
+				{{ render_field(form.description, class="form-control") }}
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					{{ render_field(form.password, class="form-control") }}
+				</div> <!-- form-group end.// -->
+				<div class="form-group col-md-6">
+					{{ render_field(form.confirm,class="form-control" ) }}
+				</div> <!-- form-group end.// -->
+			</div>
+			<label class="custom-control custom-checkbox">
+                {{ render_field(form.agree_terms, class="custom-control-input") }}
+                <span> I agree with <a href="#">terms and conditions</a>  </span>
+            </label>
+			<div class="center-button">
+				<button type="submit" class="btn btn-primary btn-block"> Register </button>
+			</div> <!-- form-group// -->
+		</form>
+		 <p class="text-center mt-4">Have an admin account? <a href="{{url_for ('login_admin')}}">Log In</a></p>
+	</div>
+</div>
+{% endblock %}
+

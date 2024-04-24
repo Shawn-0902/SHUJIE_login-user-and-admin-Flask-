@@ -1,0 +1,87 @@
+  {% extends "base.html" %}
+
+  {% block title %}Laundry Room - Upcoming Events{% endblock %}
+
+  {% block content %}
+
+  <style>
+    .event-grid {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .event-card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      padding: 10px 20px;
+      margin: 10px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      width: 100%;
+      max-width: 400px; /* Adjust the width as per your preference */
+    }
+
+    .event-info {
+      text-align: center;
+    }
+
+    .btn-participate {
+      display: block;
+      width: 200px; /* Adjust the width as per your preference */
+      margin: 20px auto;
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .btn-participate:hover {
+      background-color: #388E3C;
+    }
+  </style>
+  <div class="custom-container">
+    {% if success_message %}
+      <div class="alert alert-success" role="alert">
+        {{ success_message }}
+      </div>
+    <div id="countdown" style="font-size: 20px;"></div>
+    {% endif %}
+    <form action="" method="post">
+      <div class="event-grid">
+        {% for name in event_names %}
+          <div class="event-card">
+            <input type="radio" id="{{ name }}" name="event_name" value="{{ name }}">
+            <label for="{{ name }}">{{ name }}</label>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="participate-container">
+        <button type="submit" class="btn-participate">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+  var countdownElement = document.getElementById('countdown');
+  var remainingTime = 3; // in seconds
+
+  // Update the countdown every second
+  var countdownInterval = setInterval(function() {
+    countdownElement.textContent = "Redirecting in " + remainingTime + " seconds";
+    remainingTime--;
+
+    // Redirect when time is up
+    if (remainingTime < 0) {
+      clearInterval(countdownInterval); // Stop the countdown
+      window.location.href = "/view_registrations";
+    }
+  }, 1000); // Update every second (1000 milliseconds = 1 second)
+</script>
+
+
+  {% endblock %}

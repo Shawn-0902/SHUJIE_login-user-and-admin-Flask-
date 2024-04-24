@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Laundry Room - Services{% endblock %}
+
+{% block content %}
+
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background: #f4f4f4;
+    }
+    body > .container {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .content {
+        padding: 2rem;
+        margin: auto;
+        width: 100%;
+        max-width: 400px;
+    }
+    .service-details {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    h1 {
+        color: #333333;
+        margin-bottom: 1rem;
+    }
+    p {
+        color: #555555;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+    }
+    .service-cost {
+        background-color: #03A9F4; /* Light Blue */
+        color: white;
+        padding: 0.5rem;
+        border-radius: 4px;
+        margin-bottom: 1rem;
+    }
+    .add-to-payment-button {
+        background-color: #E91E63; /* Pink */
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background-color 0.3s ease;
+    }
+    .add-to-payment-button:hover {
+        background-color: #C2185B; /* Darker pink */
+    }
+</style>
+
+<div class="container">
+    <div class="content service-details">
+        <h1>Pick up and Delivery for Wash and Fold</h1>
+        <p>We clean and fold your clothes in the most professional way.</p>
+        <p class="service-cost">Service Cost: <strong>$100</strong></p> <!-- Replace [Cost] with the actual cost -->
+        <button class="add-to-payment-button" type="button">Add to Payment</button>
+    </div>
+</div>
+
+{% endblock %}

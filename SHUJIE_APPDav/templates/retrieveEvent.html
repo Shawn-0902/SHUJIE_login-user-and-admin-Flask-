@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}Laundry Room - Upcoming Events{% endblock %}
+
+{% block content %}
+
+
+<style>
+/* Overall container */
+.custom-container {
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #ffffff; /* white background */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Grid layout for events */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 20px;
+}
+
+/* Individual event cards */
+.event-card {
+  background: #e3f2fd; /* light blue background for a softer look */
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+/* Hover effect for event cards */
+.event-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* added shadow for depth */
+}
+
+/* Event images */
+.event-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Event information styling */
+.event-info {
+  padding: 15px;
+  background: #f1f8e9; /* light green background for the text area */
+}
+
+/* Styling for the event date */
+.event-date {
+  color: #6a1b9a; /* deep purple color for contrast */
+  margin-bottom: 10px;
+}
+
+/* Custom button styling */
+.btn-custom {
+  background-color: #29b6f6; /* bright blue for visibility */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hover effect for buttons */
+.btn-custom:hover {
+  background-color: #0288d1; /* darker blue on hover */
+}
+
+.custom-container {
+  position: relative; /* Ensure the relative positioning for the child absolute element */
+  /* ... other styles ... */
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 20px; /* Adjust this value to align it with your design */
+  right: 20px; /* Adjust this value to align it with your design */
+  z-index: 10; /* Ensure the dropdown is above other elements */
+}
+
+.filter-dropdown label {
+  margin-right: 8px;
+}
+
+.filter-dropdown select {
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+  font-size: 16px; /* Adjust as necessary for styling */
+}
+/* Style for the header and filter wrapper */
+.header-with-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* New wrapper for filter and participate button */
+.controls {
+  display: flex;
+  gap: 10px; /* This adds space between the filter dropdown and the participate button */
+}
+
+/* Style for the participate button */
+.btn-participate {
+  padding: 5px 15px;
+  background-color: #4CAF50; /* Green color for participation */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-participate:hover {
+  background-color: #388E3C; /* Darker green on hover */
+}
+
+.participate-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px; /* Adjust as necessary for your spacing */
+}
+
+/* Style for the participate button within its new container */
+.participate-container .btn-participate {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green color for participation */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  text-decoration: none; /* Remove underline from anchor tag */
+}
+
+.participate-container .btn-participate:hover {
+  background-color: #388E3C; /* Darker green on hover */
+}
+</style>
+
+<div class="custom-container">
+  <div class="header-with-filter">
+  <h1 class="display-4">Upcoming Events</h1>
+  <div class="controls">
+    <div class="filter-dropdown">
+      <label for="event-filter">Filter Events:</label>
+      <select id="event-filter" onchange="filterEvents(this.value)">
+        <option value="all" {% if filter_option == 'all' %}selected{% endif %}>All Events</option>
+        <option value="weekday" {% if filter_option == 'weekday' %}selected{% endif %}>Weekdays</option>
+        <option value="weekend" {% if filter_option == 'weekend' %}selected{% endif %}>Weekends</option>
+      </select>
+    </div>
+  </div>
+</div>
+   <div class="participate-container">
+    <a href="/Pevent" class="btn-participate">Participate</a>
+  </div>
+
+  <!-- Event Grid -->
+  <div class="event-grid">
+    {% for Event in Event_list %}
+    <div class="event-card">
+      <img src="{{ url_for('static', filename='img/' + Event.get_image()) }}" class="event-image">
+      <div class="event-info">
+        <h3>{{ Event.get_name() }}</h3>
+        <p class="event-date">{{ Event.get_date().strftime('%b %d, %Y') }}</p>
+        <p class="event-description">{{ Event.get_description() }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+{% if show_load_more %}
+  <button id="load-more" onclick="loadMore()">Load More</button>
+{% endif %}
+
+<script>
+
+function filterEvents(filter) {
+  window.location.href = `/retrieveEvent?filter=${filter}`;
+}
+
+  document.addEventListener('DOMContentLoaded', function() {
+  const currentFilter = "{{ filter_option }}";
+  const filterDropdown = document.getElementById('event-filter');
+
+  if (filterDropdown && currentFilter) {
+    filterDropdown.value = currentFilter;
+  }
+});
+
+function filterEvents(selectedFilter) {
+  window.location.href = "{{ url_for('retrieve_Event') }}" + "?filter=" + selectedFilter;
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  const currentFilter = "{{ filter_option }}";
+  const filterDropdown = document.getElementById('event-filter');
+
+  if (filterDropdown && currentFilter) {
+    filterDropdown.value = currentFilter;
+  }
+});
+
+function filterEvents(selectedFilter) {
+  window.location.href = "{{ url_for('retrieve_Event') }}" + "?filter=" + selectedFilter;
+}
+</script>
+
+ </div>
+
+{% endblock %}

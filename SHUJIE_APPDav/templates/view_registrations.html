@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Event Registrations</title>
+</head>
+<body>
+    <h1>My Event Registrations</h1>
+    {% if registrations %}
+    <table border="1">
+        <tr>
+            <th>Event Name</th>
+        </tr>
+        {% for event_name in registrations.keys() %}
+        <tr>
+            <td>{{ event_name }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <p>You have not registered for any events.</p>
+    {% endif %}
+</body>
+</html>

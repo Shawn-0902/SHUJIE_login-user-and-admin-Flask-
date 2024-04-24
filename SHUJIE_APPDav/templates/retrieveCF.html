@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+
+{% block title %}Laundry Room - Retrieve CarbonFootprint{% endblock %}
+
+{% block content %}
+
+
+<style>
+  .table-custom {
+    background-color: #f2f2f2; /* Light gray background */
+    border-collapse: collapse;
+    width: 100%;
+    }
+
+  .table-custom th, .table-custom td {
+      border: 1px solid #ddd; /* Gray borders */
+      padding: 8px;
+  }
+
+  .table-custom th {
+      background-color: #4CAF50; /* Green header */
+      color: white;
+      text-align: left;
+  }
+
+  .table-custom tr:hover {
+      background-color: #ddd; /* Hover effect */
+  }
+
+  @media screen and (max-width: 600px) {
+      .table-custom {
+          width: 100%;
+          display: block;
+          overflow-x: auto; /* Responsive table */
+      }
+  }
+    body {
+        background-color: #f8f9fa;
+        font-family: 'Arial', sans-serif;
+    }
+    .custom-container {
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .custom-container h1 {
+        color: #17a2b8;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .btn-custom {
+        background-color: #ffc107;
+        border-color: #ffc107;
+        color: black;
+    }
+    .btn-custom:hover {
+        background-color: #e0a800;
+        border-color: #d39e00;
+    }
+      .table-custom {
+        background-color: #f9f9f9;
+        border-collapse: collapse;
+        width: 100%;
+        font-family: 'Roboto', sans-serif;
+    }
+    .table-custom th, .table-custom td {
+        border: 1px solid #e3e3e3;
+        padding: 12px;
+    }
+    .table-custom th {
+        background-color: #6c757d;
+        color: white;
+    }
+    .table-custom tr:nth-child(odd) {
+        background-color: #f2f2f2;
+    }
+    .table-custom tr:hover {
+        background-color: #d1d1d1;
+    }
+    .modal-content {
+        font-family: 'Roboto', sans-serif;
+        color: #333;
+    }
+    .btn-custom {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: white;
+    }
+    .btn-custom:hover {
+        background-color: #0056b3;
+        border-color: #004085;
+    }\
+  .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ecf0f1; /* Light grey background for each list item */
+    margin-bottom: 10px;
+    border-radius: 5px; /* Rounded corners for each list item */
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+  }
+  .list-item:nth-child(odd) {
+    background-color: #dae1e7; /* Alternating background color for list items */
+  }
+  .list-actions {
+    display: flex;
+    align-items: center;
+  }
+  .list-actions a, .list-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; /* Fixed size for buttons */
+    height: 32px;
+    margin-left: 8px; /* Spacing between buttons */
+    border-radius: 50%; /* Circular buttons */
+    color: white; /* Icon color */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+  }
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+  }
+  .fa-pen, .fa-trash {
+    width: 14px; /* Fixed width for icons */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+    color: black; /* Ensures the pen icon is visible */
+  }
+
+  .btn-update .fa-pen {
+    color: black; /* This can be changed to any color that makes the pen visible */
+  }
+
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+    color: black; /* Ensures the trash icon is visible */
+  }
+
+  .btn-delete .fa-trash {
+    color: black; /* This can be changed to any color that makes the trash icon visible */
+  }
+
+  /* Additional style for hover effects */
+  .btn-update:hover, .btn-delete:hover {
+    opacity: 0; /* Slight transparency on hover for interaction feedback */
+  }
+  .btn-update {
+    background-color: #3498db; /* Blue for update */
+    color: white; /* For better contrast and visibility */
+  }
+
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+    color: white; /* Ensures the trash icon is visible */
+  }
+
+  /* Additional style for hover effects */
+  .btn-update:hover, .btn-delete:hover {
+    opacity: 0.8; /* Slight transparency on hover for interaction feedback */
+  }
+</style>
+
+
+  <div class="custom-container">
+    <h1 class="display-4">Retrieve Carbon Footprint</h1>
+    <div>
+        {% if cf_list|length == 0 %}
+            <p>There are no records.</p>
+        {% else %}
+            <p>You have {{ cf_list|length }} record(s).</p>
+            <table class="table table-custom">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Temperature</th>
+                        <th>Load</th>
+                        <th>Time</th>
+                        <th>Carbon Footprint (CO2e)</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cf in cf_list %}
+                    <tr>
+                        <td>{{ cf.get_service() }}</td>
+                        <td>{{ cf.get_temp() }}</td>
+                        <td>{{ cf.get_load() }}</td>
+                        <td>{{ cf.get_time() }}</td>
+                        <td>{{ cf.get_calculate_carbon_footprint() }}</td>
+                        <td><a href="{{ url_for('update_CF', index=loop.index0) }}" class="btn btn-custom btn-update" title="Update"><i class="fa fa-pen"></i></a></td>
+                        <td>
+                            <button type="button" class="btn btn-custom btn-delete" data-bs-toggle="modal" data-bs-target="#deleteModal{{ loop.index0 }}" title="Delete"><i class="fa fa-trash"></i></button>
+
+                            <!-- Delete Confirmation Modal -->
+                            <div class="modal fade" id="deleteModal{{ loop.index0 }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete this record?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="{{ url_for('delete_CF', index=loop.index0) }}" method="POST">
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
